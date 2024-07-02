@@ -5,7 +5,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
-  name: content_panel
+  name: reminders_pnl
   layout_properties: {slot: default}
   components:
   - name: button_1
