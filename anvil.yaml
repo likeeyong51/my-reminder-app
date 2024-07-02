@@ -10,3 +10,15 @@ services:
   client_config: {}
   server_config: {}
 startup: {type: form, module: My_Reminders}
+db_schema:
+  reminder_tbl:
+    client: none
+    server: full
+    columns:
+    - name: description
+      admin_ui: {width: 200, order: 0}
+      type: string
+    - name: done
+      admin_ui: {width: 200, order: 1}
+      type: bool
+    title: reminder_tbl
