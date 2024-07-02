@@ -9,7 +9,7 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: My_Reminders}
+startup: {type: form, module: Add_Reminders}
 db_schema:
   reminder_tbl:
     client: none
