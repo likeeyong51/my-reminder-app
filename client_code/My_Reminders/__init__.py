@@ -11,8 +11,12 @@ class My_Reminders(My_RemindersTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
+    for row in app_tables.reminder_tbl.search(tables.app_tables.reminder_tbl):
+      rd = get_reminder()
+
     # Any code you write here will run before the form opens.
 
   def add_reminder_click(self, **event_args):
     """This method is called when the button is clicked"""
-    pass
+    
+
