@@ -18,10 +18,16 @@ import anvil.server
 
 @anvil.server.callable
 def add_reminders(desc):
-  app_tables.reminder_tbl.add_row(description=desc, done=False)
+  print(desc)
+  app_tables.reminder_tbl.add_row(*desc) #description=desc, done=False)
 
 @anvil.server.callable
 def get_reminders():
   return app_tables.reminder_tbl.search(
     tables.order_by("done", ascending=True)
   )
+
+@anvil.server.callable
+def update_reminders(desc, done):
+  if app_tables.reminder_tbl.has_row(desc):
+    pass

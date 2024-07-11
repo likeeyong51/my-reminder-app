@@ -1,3 +1,20 @@
 is_package: true
 container: {type: ColumnPanel}
-components: []
+components:
+- name: reminder_pnl
+  properties: {col_widths: '{"LUNLOW":50,"CPAILC":10}', role: elevated-card}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'FVWEAY,JBXOFX'}
+  components:
+  - name: task_lbl
+    properties: {}
+    type: Label
+    layout_properties: {grid_position: 'NFJVXX,LUNLOW'}
+    data_bindings:
+    - {property: text, code: 'self.item[''description'']', writeback: false}
+  - name: status_chk
+    properties: {text: ''}
+    type: CheckBox
+    layout_properties: {grid_position: 'NFJVXX,CPAILC'}
+    data_bindings:
+    - {property: checked, code: 'self.item[''done'']', writeback: false}

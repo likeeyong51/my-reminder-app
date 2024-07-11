@@ -3,30 +3,27 @@ container:
   type: HtmlTemplate
   properties: {html: '@theme:standard-page.html'}
 components:
-- type: ColumnPanel
-  properties: {}
-  name: content_panel
-  layout_properties: {slot: default}
-  components:
-  - name: outlined_card_1
-    properties: {role: outlined-card, col_widths: '{"XENSWU":10,"MAJHHC":50}'}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'EUORJM,HYMHTP'}
-    components:
-    - name: prompt_lbl
-      properties: {text: 'Enter reminder:', align: right, bold: true}
-      type: Label
-      layout_properties: {grid_position: 'LYMDQJ,XENSWU'}
-    - name: reminder_desc_txt
-      properties: {placeholder: 'What''s do I need to remember?', role: null, tooltip: Enter a todo description here}
-      type: TextBox
-      layout_properties: {grid_position: 'LYMDQJ,MAJHHC'}
-    - name: button_1
-      properties: {text: Add}
-      type: Button
-      layout_properties: {grid_position: 'NDIZTN,STYXAS'}
-      event_bindings: {click: add_reminders}
 - type: FlowPanel
   properties: {}
   name: navbar_links
   layout_properties: {slot: nav-right}
+- name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+  layout_properties: {slot: default}
+  components:
+  - name: column_panel_1
+    properties: {col_widths: '{"ZXROKN":15,"QLHKQH":45}'}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'YAYUCE,KHYCDJ'}
+    components:
+    - name: label_1
+      properties: {text: Reminder, bold: true, align: right}
+      type: Label
+      layout_properties: {grid_position: 'AGQOHC,ZXROKN'}
+    - name: text_box_1
+      properties: {placeholder: Enter a reminder}
+      type: TextBox
+      layout_properties: {grid_position: 'AGQOHC,QLHKQH'}
+      data_bindings:
+      - {property: text, code: 'self.item[''description'']', writeback: false}

@@ -13,6 +13,4 @@ class Add_Reminders(Add_RemindersTemplate):
 
     # Any code you write here will run before the form opens.
 
-  def add_reminders(self, **event_args):
-    """This method is called when the button is clicked"""
-    anvil.server.call('add_reminders', desc=self.reminder_desc_txt.text)
+  
