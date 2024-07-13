@@ -22,3 +22,7 @@ components:
     properties: {item_template: My_Reminders.ItemTemplate1}
     type: RepeatingPanel
     layout_properties: {grid_position: 'DGHGFF,DSBBPF'}
+- name: label_1
+  properties: {text: My Reminders}
+  type: Label
+  layout_properties: {slot: title}

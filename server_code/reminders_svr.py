@@ -17,17 +17,19 @@ import anvil.server
 #
 
 @anvil.server.callable
-def add_reminders(desc):
-  print(desc)
-  app_tables.reminder_tbl.add_row(*desc) #description=desc, done=False)
+def add_reminder(reminder):
+  if reminder is not None:
+    app_tables.reminder_tbl.add_row(**reminder) #task=reminder('task'), status=False)
 
 @anvil.server.callable
 def get_reminders():
   return app_tables.reminder_tbl.search(
-    tables.order_by("done", ascending=True)
+    tables.order_by("status", ascending=True)
   )
 
 @anvil.server.callable
-def update_reminders(desc, done):
-  if app_tables.reminder_tbl.has_row(desc):
-    pass
+def update_reminder(reminder):
+  if app_tables.reminder_tbl.has_row(reminder['task']):
+    row = app_tables.reminder_tbl.search(task=reminder['task'])
+    row['task'] = reminder['task']
+    row['status'] = reminder['status']

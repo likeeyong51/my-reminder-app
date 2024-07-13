@@ -11,10 +11,11 @@ components:
     type: Label
     layout_properties: {grid_position: 'NFJVXX,LUNLOW'}
     data_bindings:
-    - {property: text, code: 'self.item[''description'']', writeback: false}
+    - {property: text, code: 'self.item[''task'']', writeback: false}
   - name: status_chk
     properties: {text: ''}
     type: CheckBox
     layout_properties: {grid_position: 'NFJVXX,CPAILC'}
     data_bindings:
-    - {property: checked, code: 'self.item[''done'']', writeback: false}
+    - {property: checked, code: 'self.item[''status'']', writeback: true}
+    event_bindings: {change: status_chk_change}

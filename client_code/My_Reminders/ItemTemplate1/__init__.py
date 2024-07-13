@@ -12,3 +12,8 @@ class ItemTemplate1(ItemTemplate1Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def status_chk_change(self, **event_args):
+    """This method is called when this checkbox is checked or unchecked"""
+    if self.status_chk.checked:
+      anvil.server.call('update_reminder', self.item)

@@ -4,7 +4,7 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..Add_Reminders import Add_Reminders
+from ..Edit_reminder import Edit_reminder
 
 class My_Reminders(My_RemindersTemplate):
   def __init__(self, **properties):
@@ -22,7 +22,7 @@ class My_Reminders(My_RemindersTemplate):
     new_reminder = {}
     # open an alert displaying the ARticleEdit form
     save_clicked = alert(
-      content = Add_Reminders(item=new_reminder),
+      content = Edit_reminder(item=new_reminder),
       title="Add Reminder",
       large=True,
       buttons=[("Save", True),("Cancel", False)]
@@ -30,8 +30,7 @@ class My_Reminders(My_RemindersTemplate):
     
     # If the alert returned 'True', the save button was clicked
     if save_clicked:
-      print(new_reminder)
-      anvil.server.call('add_reminders', new_reminder)
+      anvil.server.call('add_reminder', new_reminder)
       self.refresh_reminders()
     
 
