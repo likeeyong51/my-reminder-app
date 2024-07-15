@@ -30,6 +30,7 @@ def get_reminders():
 @anvil.server.callable
 def update_reminder(reminder):
   if app_tables.reminder_tbl.has_row(reminder['task']):
+    print(f"updating reminder {reminder['task']} {reminder['status']}")
     row = app_tables.reminder_tbl.search(task=reminder['task'])
     row['task'] = reminder['task']
     row['status'] = reminder['status']
