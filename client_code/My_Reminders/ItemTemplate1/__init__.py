@@ -15,7 +15,7 @@ class ItemTemplate1(ItemTemplate1Template):
 
   def status_chk_change(self, **event_args):
     """This method is called when this checkbox is checked or unchecked"""
-    item = dict(self.item)
+    print(f"Checked status: {self.status_chk.checked}")
     
-    if self.status_chk.checked:
-      anvil.server.call('update_reminder', item)
+    # if self.status_chk.checked:
+    anvil.server.call('update_reminder', dict(self.item), self.status_chk.checked)
