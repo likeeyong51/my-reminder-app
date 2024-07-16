@@ -15,6 +15,7 @@ class My_Reminders(My_RemindersTemplate):
     self.refresh_reminders()
 
     # Any code you write here will run before the form opens.
+    self.reminders_pnl.set_event_handler('x-delete-reminder', self.delete_reminder)
 
   def add_reminder_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -36,3 +37,7 @@ class My_Reminders(My_RemindersTemplate):
 
   def refresh_reminders(self):
     self.reminders_pnl.items = anvil.server.call('get_reminders')
+
+  def delete_reminder(self, reminder, **event_args):
+    anvil.server.call('delete_reminder', reminder)
+    self.refresh_reminders()

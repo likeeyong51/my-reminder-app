@@ -35,4 +35,7 @@ def update_reminder(reminder, new_status):
   
   if row: # if exist, update status of reminder
     row['status'] = new_status
-    
+
+@anvil.server.callable
+def delete_reminder(reminder):
+  reminder.delete()

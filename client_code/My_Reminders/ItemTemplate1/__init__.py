@@ -18,3 +18,9 @@ class ItemTemplate1(ItemTemplate1Template):
     # print(f"Checked status: {self.status_chk.checked}")
     
     anvil.server.call('update_reminder', self.item, self.status_chk.checked)
+
+  def delete_btn_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    if confirm("Are you sure you want to delete?"):
+      # anvil.server.call('delete_reminder', self.item)
+      self.parent.raise_event('x-delete-reminder', reminder=self.item)
