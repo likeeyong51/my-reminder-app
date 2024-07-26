@@ -37,13 +37,15 @@ def update_reminder_status(reminder, new_status):
     row['status'] = new_status
     
 @anvil.server.callable
-def update_reminder(reminder, a_reminder):
+def update_reminder(old_reminder, new_reminder):
   # print(f"updating reminder {reminder['task']} {new_status}")
   # get the task from the reminders table
-  row = app_tables.reminder_tbl.get(task=reminder['task'])
-  
-  if row: # if exist, update status of reminder
-    row = a_reminder
+  print(old_reminder)
+  row = app_tables.reminder_tbl.get(task=old_reminder)
+
+  if row: # if exist, update task description and status of reminder
+    row['task']   = new_reminder['task']
+    row['status'] = new_reminder['status']
 
 @anvil.server.callable
 def delete_reminder(reminder):

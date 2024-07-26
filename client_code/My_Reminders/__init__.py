@@ -16,7 +16,7 @@ class My_Reminders(My_RemindersTemplate):
 
     # set delete_reminder event handler to the reminders_pnl
     self.reminders_pnl.set_event_handler('x-delete-reminder', self.delete_reminder)
-
+    
   def add_reminder_click(self, **event_args):
     """This method is called when the button is clicked"""
     # Initialise an empty dictionary to store the user inputs

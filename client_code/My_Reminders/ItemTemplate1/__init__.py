@@ -27,16 +27,22 @@ class ItemTemplate1(ItemTemplate1Template):
 
   def update_btn_click(self, **event_args):
     """This method is called when the button is clicked"""
-    a_reminder = {self.task_lbl.text, self.status_chk.checked}
-    print(a_reminder)
+    old_reminder = self.item['task']
+    new_reminder = dict(self.item)
+    
+    print(old_reminder)
     # open an alert displaying the ArticleEdit form
     save_clicked = alert(
-      content = Edit_reminder(item=a_reminder),
+      content = Edit_reminder(item=new_reminder),
       title="Update Reminder",
       large=True,
       buttons=[("Save", True),("Cancel", False)]
     )
 
     if save_clicked:
-      print(a_reminder)
-      anvil.server.call('update_reminder', a_reminder)
+      print(new_reminder)
+      self.task_lbl.text      = new_reminder['task']
+      self.status_chk.checked = new_reminder['status']
+      anvil.server.call('update_reminder', old_reminder, new_reminder)
+
+
