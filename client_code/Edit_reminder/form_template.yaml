@@ -1,6 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{"NQIQFQ":10,"GFQCXF":65,"AOAQIX":5}'}
+  properties: {col_widths: '{"NQIQFQ":15,"GFQCXF":60,"AOAQIX":5}'}
 components:
 - name: label_1
   properties: {text: 'Wha''ts my reminder?'}
