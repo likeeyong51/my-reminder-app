@@ -14,7 +14,7 @@ class My_Reminders(My_RemindersTemplate):
     # populate reminders
     self.refresh_reminders()
 
-    # Any code you write here will run before the form opens.
+    # set delete_reminder event handler to the reminders_pnl
     self.reminders_pnl.set_event_handler('x-delete-reminder', self.delete_reminder)
 
   def add_reminder_click(self, **event_args):
@@ -31,11 +31,13 @@ class My_Reminders(My_RemindersTemplate):
     
     # If the alert returned 'True', the save button was clicked
     if save_clicked:
+      # Then, add new reminder to the database
       anvil.server.call('add_reminder', new_reminder)
       self.refresh_reminders()
     
 
   def refresh_reminders(self):
+    # populate reminders_pnl items with the list of reminders
     self.reminders_pnl.items = anvil.server.call('get_reminders')
 
   def delete_reminder(self, reminder, **event_args):

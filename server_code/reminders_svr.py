@@ -28,13 +28,22 @@ def get_reminders():
   )
 
 @anvil.server.callable
-def update_reminder(reminder, new_status):
+def update_reminder_status(reminder, new_status):
   # print(f"updating reminder {reminder['task']} {new_status}")
   # get the task from the reminders table
   row = app_tables.reminder_tbl.get(task=reminder['task'])
   
   if row: # if exist, update status of reminder
     row['status'] = new_status
+    
+@anvil.server.callable
+def update_reminder(reminder, a_reminder):
+  # print(f"updating reminder {reminder['task']} {new_status}")
+  # get the task from the reminders table
+  row = app_tables.reminder_tbl.get(task=reminder['task'])
+  
+  if row: # if exist, update status of reminder
+    row = a_reminder
 
 @anvil.server.callable
 def delete_reminder(reminder):

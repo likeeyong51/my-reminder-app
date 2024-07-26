@@ -4,7 +4,7 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+from ...Edit_reminder import Edit_reminder
 
 class ItemTemplate1(ItemTemplate1Template):
   def __init__(self, **properties):
@@ -14,13 +14,29 @@ class ItemTemplate1(ItemTemplate1Template):
     # Any code you write here will run before the form opens.
 
   def status_chk_change(self, **event_args):
-    """This method is called when this checkbox is checked or unchecked"""
+    """update the status of a reminder"""
     # print(f"Checked status: {self.status_chk.checked}")
     
-    anvil.server.call('update_reminder', self.item, self.status_chk.checked)
+    anvil.server.call('update_reminder_status', self.item, self.status_chk.checked)
 
   def delete_btn_click(self, **event_args):
     """This method is called when the button is clicked"""
     if confirm("Are you sure you want to delete?"):
       # anvil.server.call('delete_reminder', self.item)
       self.parent.raise_event('x-delete-reminder', reminder=self.item)
+
+  def update_btn_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    a_reminder = {self.task_lbl.text, self.status_chk.checked}
+    print(a_reminder)
+    # open an alert displaying the ArticleEdit form
+    save_clicked = alert(
+      content = Edit_reminder(item=a_reminder),
+      title="Update Reminder",
+      large=True,
+      buttons=[("Save", True),("Cancel", False)]
+    )
+
+    if save_clicked:
+      print(a_reminder)
+      anvil.server.call('update_reminder', a_reminder)
