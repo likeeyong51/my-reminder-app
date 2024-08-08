@@ -9,7 +9,7 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: My_Reminders}
+startup: {type: form, module: login_frm}
 db_schema:
   reminder_tbl:
     client: search
@@ -21,4 +21,19 @@ db_schema:
     - name: status
       admin_ui: {order: 1, width: 200}
       type: bool
+    - name: user
+      admin_ui: {width: 200, order: 2}
+      type: link_single
+      target: user_tbl
     title: reminder_tbl
+  user_tbl:
+    client: search
+    server: full
+    columns:
+    - name: username
+      admin_ui: {width: 200, order: 0}
+      type: string
+    - name: password
+      admin_ui: {width: 200, order: 1}
+      type: string
+    title: user_tbl

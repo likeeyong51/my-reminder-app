@@ -1,0 +1,47 @@
+container: {type: ColumnPanel}
+components:
+- name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'JOZTGS,BKZVPP'}
+  components:
+  - name: label_3
+    properties: {text: Login, align: center, bold: true, icon: 'fa:arrow-circle-o-down', role: title}
+    type: Label
+    layout_properties: {grid_position: 'QIYAIP,BMRCRE'}
+  - name: column_panel_1
+    properties: {col_widths: '{"SDKTGH":50,"WOOPBP":10}'}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'UBYSFD,MLOJAK'}
+    components:
+    - name: label_1
+      properties: {text: Username, align: right, bold: true}
+      type: Label
+      layout_properties: {grid_position: 'DQKDBB,MJMWHI'}
+    - name: username_txb
+      properties: {}
+      type: TextBox
+      layout_properties: {grid_position: 'DQKDBB,FDMGSH'}
+      data_bindings:
+      - {property: text, code: 'self.item[''username'']', writeback: true}
+    - name: label_2
+      properties: {text: Password, align: right, bold: true}
+      type: Label
+      layout_properties: {grid_position: 'AIIUKR,SLPXZA'}
+    - name: password_txb
+      properties: {}
+      type: TextBox
+      layout_properties: {grid_position: 'AIIUKR,FAAJSW'}
+      data_bindings:
+      - {property: text, code: 'self.item[''password'']', writeback: true}
+    - name: sign_btn
+      properties: {text: Sign In, role: outlined-button, align: right}
+      type: Button
+      layout_properties: {grid_position: 'UNSZGC,SDKTGH'}
+      event_bindings: {click: sign_btn_click}
+    - name: signup_chk
+      properties: {text: Sign up}
+      type: CheckBox
+      layout_properties: {grid_position: 'UNSZGC,WOOPBP'}
+      event_bindings: {change: signup_chk_change}
+is_package: true

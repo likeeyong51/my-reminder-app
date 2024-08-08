@@ -22,8 +22,9 @@ def add_reminder(reminder):
     app_tables.reminder_tbl.add_row(**reminder) #task=reminder('task'), status=False)
 
 @anvil.server.callable
-def get_reminders():
+def get_reminders(username):
   return app_tables.reminder_tbl.search(
+    user=username,
     tables.order_by("status", ascending=True)
   )
 

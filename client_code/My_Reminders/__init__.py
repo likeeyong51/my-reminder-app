@@ -11,6 +11,8 @@ class My_Reminders(My_RemindersTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
+    self.item['username'] = properties['username']
+
     # populate reminders
     self.refresh_reminders()
 
@@ -38,7 +40,7 @@ class My_Reminders(My_RemindersTemplate):
 
   def refresh_reminders(self):
     # populate reminders_pnl items with the list of reminders
-    self.reminders_pnl.items = anvil.server.call('get_reminders')
+    self.reminders_pnl.items = anvil.server.call('get_reminders', self.item['username'])
 
   def delete_reminder(self, reminder, **event_args):
     anvil.server.call('delete_reminder', reminder)
