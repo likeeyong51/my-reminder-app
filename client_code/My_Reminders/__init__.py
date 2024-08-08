@@ -13,8 +13,9 @@ class My_Reminders(My_RemindersTemplate):
 
     self.item['username'] = properties['username']
     #print(self.item['username'])
-    # populate reminders
+    # show reminders for user
     self.refresh_reminders()
+    self.user_txb.text = self.item['username']
 
     # set delete_reminder event handler to the reminders_pnl
     self.reminders_pnl.set_event_handler('x-delete-reminder', self.delete_reminder)
@@ -47,3 +48,4 @@ class My_Reminders(My_RemindersTemplate):
   def delete_reminder(self, reminder, **event_args):
     anvil.server.call('delete_reminder', reminder)
     self.refresh_reminders()
+

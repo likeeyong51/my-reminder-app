@@ -12,9 +12,7 @@ class ItemTemplate1(ItemTemplate1Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
-    #self.item['username'] = self.user_lbl.text[0]
-    #print(self.item['username'])
-
+   
   def status_chk_change(self, **event_args):
     """update the status of a reminder"""
     # print(f"Checked status: {self.status_chk.checked}")
@@ -28,7 +26,7 @@ class ItemTemplate1(ItemTemplate1Template):
       self.parent.raise_event('x-delete-reminder', reminder=self.item)
 
   def update_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
+    """update existing reminder"""
     old_reminder = self.item['task']
     new_reminder = dict(self.item)
     
@@ -36,15 +34,21 @@ class ItemTemplate1(ItemTemplate1Template):
     # open an alert displaying the ArticleEdit form
     save_clicked = alert(
       content = Edit_reminder(item=new_reminder),
-      title="Update Reminder",
-      large=True,
-      buttons=[("Save", True),("Cancel", False)]
+      title   = "Update Reminder",
+      large   = True,
+      buttons = [("Save", True),("Cancel", False)]
     )
 
     if save_clicked:
       print(new_reminder)
       self.task_lbl.text      = new_reminder['task']
       self.status_chk.checked = new_reminder['status']
+      self.due_dpk.date       = new_reminder['due']
       anvil.server.call('update_reminder', old_reminder, new_reminder)
+
+  def due_dpk_change(self, **event_args):
+    """update due date"""
+    anvil.server.call('update_due_date', self.item, self.due_dpk.date)
+    
 
 

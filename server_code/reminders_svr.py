@@ -40,7 +40,7 @@ def get_reminders(username):
 def update_reminder_status(reminder, new_status):
   # print(f"updating reminder {reminder['task']} {new_status}")
   # get the task from the reminders table
-  row = app_tables.reminder_tbl.get(task=reminder['task'])
+  row = app_tables.reminder_tbl.get(task=reminder['task'], user=reminder['user'])
   
   if row: # if exist, update status of reminder
     row['status'] = new_status
@@ -50,12 +50,22 @@ def update_reminder(old_reminder, new_reminder):
   # print(f"updating reminder {reminder['task']} {new_status}")
   # get the task from the reminders table
   print(old_reminder)
-  row = app_tables.reminder_tbl.get(task=old_reminder)
+  row = app_tables.reminder_tbl.get(task=old_reminder, user=new_reminder['user'])
 
   if row: # if exist, update task description and status of reminder
     row['task']   = new_reminder['task']
     row['status'] = new_reminder['status']
+    row['due']    = new_reminder['due']
 
 @anvil.server.callable
 def delete_reminder(reminder):
   reminder.delete()
+
+@anvil.server.callable
+def update_due_date(reminder, new_date):
+  # print(f"updating reminder {reminder['task']} {new_status}")
+  # get the task from the reminders table
+  row = app_tables.reminder_tbl.get(task=reminder['task'], user=reminder['user'])
+  
+  if row: # if exist, update status of reminder
+    row['due'] = new_date

@@ -18,7 +18,13 @@ import anvil.server
 
 @anvil.server.callable
 def create_user(username, password):
+  row = app_tables.user_tbl.search(username=username, password=password)
+
+  if len(row) == 1:
+    return False # user exists 
+
   app_tables.user_tbl.add_row(username=username, password=password)
+  return True
 
 @anvil.server.callable
 def authenticate_user(username, password):

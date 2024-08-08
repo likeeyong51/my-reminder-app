@@ -7,9 +7,15 @@ components:
   properties: {}
   name: navbar_links
   layout_properties: {slot: nav-right}
-  components: []
+  components:
+  - name: user_txb
+    properties: {icon: 'fa:address-book', font_size: 12}
+    type: Label
+    data_bindings:
+    - {property: text, code: 'self.item[''username'']', writeback: false}
+    layout_properties: {}
 - name: outlined_card_1
-  properties: {role: outlined-card, col_widths: '{}'}
+  properties: {role: elevated-card, col_widths: '{}'}
   type: ColumnPanel
   layout_properties: {slot: default}
   components:

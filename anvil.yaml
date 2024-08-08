@@ -25,6 +25,9 @@ db_schema:
       admin_ui: {width: 200, order: 2}
       type: link_single
       target: user_tbl
+    - name: due
+      admin_ui: {width: 200, order: 3}
+      type: date
     title: reminder_tbl
   user_tbl:
     client: search

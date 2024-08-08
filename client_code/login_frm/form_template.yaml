@@ -29,11 +29,12 @@ components:
       type: Label
       layout_properties: {grid_position: 'AIIUKR,SLPXZA'}
     - name: password_txb
-      properties: {}
+      properties: {hide_text: true}
       type: TextBox
       layout_properties: {grid_position: 'AIIUKR,FAAJSW'}
       data_bindings:
       - {property: text, code: 'self.item[''password'']', writeback: true}
+      event_bindings: {pressed_enter: sign_btn_click}
     - name: sign_btn
       properties: {text: Sign In, role: outlined-button, align: right}
       type: Button
