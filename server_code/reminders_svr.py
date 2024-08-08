@@ -17,16 +17,24 @@ import anvil.server
 #
 
 @anvil.server.callable
-def add_reminder(reminder):
+def add_reminder(reminder, current_user):
   if reminder is not None:
-    app_tables.reminder_tbl.add_row(**reminder) #task=reminder('task'), status=False)
+    current_user = app_tables.user_tbl.search(username=current_user)
+    # print(*current_user[0]['username'])
+  
+    if current_user is not None:
+      app_tables.reminder_tbl.add_row(**reminder, user=current_user[0]) #task=reminder('task'), status=False)
 
 @anvil.server.callable
 def get_reminders(username):
-  return app_tables.reminder_tbl.search(
-    user=username,
-    tables.order_by("status", ascending=True)
-  )
+  current_user = app_tables.user_tbl.search(username=username)
+  # print(*current_user[0]['username'])
+
+  if current_user is not None:
+    return app_tables.reminder_tbl.search(
+      tables.order_by("status", ascending=True),
+      user=current_user[0]
+    )
 
 @anvil.server.callable
 def update_reminder_status(reminder, new_status):

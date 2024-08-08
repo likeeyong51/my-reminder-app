@@ -12,6 +12,8 @@ class ItemTemplate1(ItemTemplate1Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    #self.item['username'] = self.user_lbl.text[0]
+    #print(self.item['username'])
 
   def status_chk_change(self, **event_args):
     """update the status of a reminder"""

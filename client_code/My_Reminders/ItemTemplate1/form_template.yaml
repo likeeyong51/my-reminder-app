@@ -6,6 +6,12 @@ components:
   type: ColumnPanel
   layout_properties: {grid_position: 'FVWEAY,JBXOFX'}
   components:
+  - name: user_lbl
+    properties: {visible: false}
+    type: Label
+    layout_properties: {grid_position: 'DUZDBS,ICJXLQ'}
+    data_bindings:
+    - {property: text, code: 'self.item[''user'']', writeback: false}
   - name: task_lbl
     properties: {}
     type: Label

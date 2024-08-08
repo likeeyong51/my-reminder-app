@@ -12,7 +12,7 @@ class My_Reminders(My_RemindersTemplate):
     self.init_components(**properties)
 
     self.item['username'] = properties['username']
-
+    #print(self.item['username'])
     # populate reminders
     self.refresh_reminders()
 
@@ -34,13 +34,15 @@ class My_Reminders(My_RemindersTemplate):
     # If the alert returned 'True', the save button was clicked
     if save_clicked:
       # Then, add new reminder to the database
-      anvil.server.call('add_reminder', new_reminder)
+      anvil.server.call('add_reminder', new_reminder, self.item['username'])
       self.refresh_reminders()
     
 
   def refresh_reminders(self):
     # populate reminders_pnl items with the list of reminders
+    #print(self.item['username'])
     self.reminders_pnl.items = anvil.server.call('get_reminders', self.item['username'])
+    
 
   def delete_reminder(self, reminder, **event_args):
     anvil.server.call('delete_reminder', reminder)
