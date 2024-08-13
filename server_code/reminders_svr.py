@@ -3,6 +3,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+# from anvil import Notification
+from datetime import datetime, timedelta
 
 # This is a server module. It runs on the Anvil server,
 # rather than in the user's browser.
@@ -80,3 +82,21 @@ def send_email(address, task):
     html='This is a friendly reminder that the following task requires your attention:<br>' + task,
     text="This is a friendly reminder that the following task requires your attention." + task
   )
+
+@anvil.server.callable
+def check_due_tasks(interval=24): # default is 24 hours
+  now = datetime.now()
+  for task in app_tables.reminder_tbl.search():
+    due_date = task['due']
+    # Check if the task is due within the next 24 hours
+    if due_date - now <= timedelta(hours=interval):
+      # Create and show a notification
+      # n = Notification(f"Task '{task['task']}' is almost due!")
+      # n.show()
+      print(f"Task '{task['task']}' is almost due!")
+      return f"Task '{task['task']}' is almost due!"
+
+# import anvil.server
+
+# # Schedule the 'check_due_tasks' function to run every hour
+# anvil.server.schedule('check_due_tasks', interval='1h')

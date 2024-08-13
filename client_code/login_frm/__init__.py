@@ -16,9 +16,9 @@ class login_frm(login_frmTemplate):
   def signup_chk_change(self, **event_args):
     """allow user to sign up with a new account"""
     if self.signup_chk.checked:
-      if self.username_txb.text != '' and self.password_txb.text != '':
+      if self.username_txb.text != '' and self.password_txb.text != '' and self.email_txb.text != '':
         # app_tables.user_tbl.add_row(username=self.item['username'], password=self.item['password'])
-        if not anvil.server.call('create_user', self.item['username'], self.item['password']):
+        if not anvil.server.call('create_user', self.item['username'], self.item['password'], self.item['email']):
           alert('User already exists.')
           self.reset_form()
           return
@@ -28,7 +28,7 @@ class login_frm(login_frmTemplate):
           self.reset_form()
           alert('You are signed up! Please attempt a login now')
       else:
-        alert("Please enter a username and password")
+        alert("Please enter a username, password and a contact email address")
 
   def sign_btn_click(self, **event_args):
     """login authentication"""
@@ -36,7 +36,7 @@ class login_frm(login_frmTemplate):
     user_exist = anvil.server.call('authenticate_user', self.item['username'], self.item['password'])
 
     if user_exist:
-      alert("Welcome to your reminder app")
+      # alert("Welcome to your reminder app")
       open_form('My_Reminders', username=self.item['username'])
     else:
       alert("Error: please check your login credentials and try again...")
@@ -46,4 +46,5 @@ class login_frm(login_frmTemplate):
     self.signup_chk.checked = False
     self.password_txb.text  = ''
     self.username_txb.text  = ''
+    self.email_txb.text     = ''
   

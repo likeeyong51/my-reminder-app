@@ -18,7 +18,7 @@ import anvil.server
 #
 
 @anvil.server.callable
-def create_user(username, password):
+def create_user(username, password, email):
   row = app_tables.user_tbl.search(username=username, password=password)
 
   # check if user exists
@@ -26,7 +26,7 @@ def create_user(username, password):
     return False # user exists 
 
   # add new user to the user table
-  app_tables.user_tbl.add_row(username=username, password=password)
+  app_tables.user_tbl.add_row(username=username, password=password, email=email)
   return True
 
 @anvil.server.callable

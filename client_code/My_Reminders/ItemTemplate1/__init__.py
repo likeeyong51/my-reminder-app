@@ -6,12 +6,14 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ...Edit_reminder import Edit_reminder
 
+
 class ItemTemplate1(ItemTemplate1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    
    
   def status_chk_change(self, **event_args):
     """update the status of a reminder"""

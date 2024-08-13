@@ -5,11 +5,16 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Edit_reminder import Edit_reminder
+from anvil import Notification
 
 class My_Reminders(My_RemindersTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+
+    # show welcome notification
+    n = Notification("Welcome to your reminder!")
+    n.show()
 
     self.item['username'] = properties['username']
     #print(self.item['username'])
