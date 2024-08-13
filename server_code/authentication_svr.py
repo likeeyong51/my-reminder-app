@@ -1,3 +1,4 @@
+import anvil.email
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -20,9 +21,11 @@ import anvil.server
 def create_user(username, password):
   row = app_tables.user_tbl.search(username=username, password=password)
 
+  # check if user exists
   if len(row) == 1:
     return False # user exists 
 
+  # add new user to the user table
   app_tables.user_tbl.add_row(username=username, password=password)
   return True
 
@@ -30,7 +33,9 @@ def create_user(username, password):
 def authenticate_user(username, password):
   row = app_tables.user_tbl.search(username=username, password=password)
 
+    # if user exist
   if len(row) == 1:
     return True # found
 
+  # user does not exist yet
   return False # not found

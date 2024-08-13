@@ -15,8 +15,11 @@ class My_Reminders(My_RemindersTemplate):
     #print(self.item['username'])
     # show reminders for user
     self.refresh_reminders()
-    self.user_txb.text = self.item['username']
 
+    # show current username
+    #self.user_lbl.text = self.item['username']
+    self.user_drp.items = (self.item['username'], 'Logout')
+    
     # set delete_reminder event handler to the reminders_pnl
     self.reminders_pnl.set_event_handler('x-delete-reminder', self.delete_reminder)
     
@@ -48,4 +51,11 @@ class My_Reminders(My_RemindersTemplate):
   def delete_reminder(self, reminder, **event_args):
     anvil.server.call('delete_reminder', reminder)
     self.refresh_reminders()
+
+  def user_drp_change(self, **event_args):
+    """This method is called when an item is selected"""
+    if self.user_drp.selected_value == 'Logout':
+      # print(self.user_drp.selected_value)
+      self.item['username'] = ''
+      open_form('login_frm')
 

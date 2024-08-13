@@ -8,12 +8,15 @@ components:
   name: navbar_links
   layout_properties: {slot: nav-right}
   components:
-  - name: user_txb
-    properties: {icon: 'fa:address-book', font_size: 12}
+  - name: user_lbl
+    properties: {font_size: 18, icon: 'fa:address-book-o'}
     type: Label
-    data_bindings:
-    - {property: text, code: 'self.item[''username'']', writeback: false}
     layout_properties: {}
+  - name: user_drp
+    properties: {include_placeholder: false, placeholder: Logout here, role: outlined, font_size: 15, bold: true}
+    type: DropDown
+    event_bindings: {change: user_drp_change}
+    layout_properties: {width: -40}
 - name: outlined_card_1
   properties: {role: elevated-card, col_widths: '{}'}
   type: ColumnPanel

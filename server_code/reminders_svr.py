@@ -1,3 +1,4 @@
+import anvil.email
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -69,3 +70,13 @@ def update_due_date(reminder, new_date):
   
   if row: # if exist, update status of reminder
     row['due'] = new_date
+
+@anvil.server.callable
+def send_email(address, task):
+  anvil.email.send(
+    from_name="Notification from  your reminders app",
+    to=address,
+    subject="Your task is almost due",
+    html='This is a friendly reminder that the following task requires your attention:<br>' + task,
+    text="This is a friendly reminder that the following task requires your attention." + task
+  )

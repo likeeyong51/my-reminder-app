@@ -48,6 +48,7 @@ class ItemTemplate1(ItemTemplate1Template):
 
   def due_dpk_change(self, **event_args):
     """update due date"""
+    print(self.due_dpk.date.strftime('%H:%M:%S'))
     anvil.server.call('update_due_date', self.item, self.due_dpk.date)
     
 

@@ -22,7 +22,8 @@ class login_frm(login_frmTemplate):
           alert('User already exists.')
           self.reset_form()
           return
-          
+
+        # check if new user has been successfully added into the user table 
         if anvil.server.call('authenticate_user', self.item['username'], self.item['password']):
           self.reset_form()
           alert('You are signed up! Please attempt a login now')
