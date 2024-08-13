@@ -73,7 +73,7 @@ def update_due_date(reminder, new_date):
   if row: # if exist, update status of reminder
     row['due'] = new_date
 
-@anvil.server.callable
+# @anvil.server.callable
 def send_email(address, task):
   anvil.email.send(
     from_name="Notification from  your reminders app",
@@ -84,17 +84,24 @@ def send_email(address, task):
   )
 
 @anvil.server.callable
-def check_due_tasks(interval=24): # default is 24 hours
-  now = datetime.now()
-  for task in app_tables.reminder_tbl.search():
+def check_due_tasks(username, interval=24): # default is 24 hours
+  now = datetime.now() # get current date and time
+  
+  for task in app_tables.reminder_tbl.search(user=username):
     due_date = task['due']
+    due      = task['status']
+  
+    print(due)
     # Check if the task is due within the next 24 hours
-    if due_date - now <= timedelta(hours=interval):
-      # Create and show a notification
-      # n = Notification(f"Task '{task['task']}' is almost due!")
-      # n.show()
+    if due_date - now <= timedelta(hours=interval) and not due:
+      # retrive user record
+      row = app_tables.user_tbl.get(username=task['user']['username'])
+      
+      send_email(row['email'], task['task'])
       print(f"Task '{task['task']}' is almost due!")
       return f"Task '{task['task']}' is almost due!"
+
+    return "" # no tasks due yet
 
 # import anvil.server
 

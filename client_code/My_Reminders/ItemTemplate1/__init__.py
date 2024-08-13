@@ -5,7 +5,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ...Edit_reminder import Edit_reminder
-
+from anvil import Notification
 
 class ItemTemplate1(ItemTemplate1Template):
   def __init__(self, **properties):
@@ -13,6 +13,12 @@ class ItemTemplate1(ItemTemplate1Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    # check and notify of any due task
+    msg = anvil.server.call('check_due_tasks', self.item['user'])
+    print(msg)
+    if msg != '':
+      n = Notification(msg)
+      n.show()
     
    
   def status_chk_change(self, **event_args):
